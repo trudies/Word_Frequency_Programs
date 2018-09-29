@@ -11,11 +11,13 @@ options(stringsAsFactors=FALSE)
 #call function for descriptive measures
 source(paste0(getwd(),"/Programs/descriptive_measures.R"))
 #identify measures included in final data
-measures <- c( "Language","Family", "Tokens(N)", "Types(V)", "Std Dev", "CV", "Range","Median","Skewness", 
-			"Kurtosis", "TTR", "RTTR", "HerdanC", "Rubetk", "Somer", "DugastU", "TuldavaLN",
-			"BrunetW", "HapV", "HonoreH", "SichelS", "HapN", "DisN", "Entropy", "YuleK",
-			"HDD", "ZMalpha", "ZMB", "fZMalpha", "fZMB", "fZMA", "GIGPgamma", "GIGPB", "GIGPC","PowerlawAlpha")
-				
+# measures <- c( "Language","Family", "Tokens(N)", "Types(V)", "Std Dev", "CV", "Range","Median","Skewness", 
+# 			"Kurtosis", "TTR", "RTTR", "HerdanC", "Rubetk", "Somer", "DugastU", "TuldavaLN",
+# 			"BrunetW", "HapV", "HonoreH", "SichelS", "HapN", "DisN", "Entropy", "YuleK",
+# 			"HDD", "ZMalpha", "ZMB", "fZMalpha", "fZMB", "fZMA", "GIGPgamma", "GIGPB", "GIGPC","PowerlawAlpha")
+measures <- c( "Language","Family", "Tokens(N)", "Types(V)", "Std Dev", "TTR", 
+               "HapV", "SichelS", "HapN", "DisN", "Entropy", "YuleK",
+               "HDD", "PowerlawAlpha")				
 		
 #to decode language codes, language names, language family
 decode <- read.csv(paste0(getwd(),"/Programs/Decode.csv"), header = TRUE, sep = ";", quote = "", allowEscapes = TRUE)
@@ -23,7 +25,7 @@ decode <- read.csv(paste0(getwd(),"/Programs/Decode.csv"), header = TRUE, sep = 
 #Base simulations on dimentions of empirical data
 files <- list.files(path = paste0(getwd(),"/Results/Diversity_Measures/Empirical/Languages"))
 
-numsim <- 100 #number of simulated sets for each language
+numsim <- 50 #number of simulated sets for each language
 
 #create empty matrix for simulated sets:
 simmat <- matrix(0,numsim,length(measures))
@@ -43,7 +45,7 @@ tic <- proc.time()
 	tokens <- as.numeric(empirical$x[3])
 	types <- as.numeric(empirical$x[4])
 
-	poweralpha <- as.numeric(empirical$x[35]) #powerlawalpha estimated already
+	poweralpha <- as.numeric(empirical$x[14]) #powerlawalpha estimated already
 
 	for (i in 1:numsim){
 		#simulation of values from a powerlaw distribution:

@@ -5,7 +5,7 @@ library(entropy)
 library(zipfR)
 
 
-#setwd("/Users/trudiestrauss/Dropbox/Research/PhD/Word_Frequency/Project")
+setwd("/Users/trudiestrauss/Dropbox/Research/PhD/Word_Frequency/Project")
 
 options(stringsAsFactors=FALSE) 
 
@@ -14,11 +14,14 @@ tic <- proc.time()
 #call function for descriptive measures
 source(paste0(getwd(),"/Programs/descriptive_measures.R"))
 #identify measures included in final data
-measures <- c( "Language","Family", "Tokens(N)", "Types(V)", "Std Dev", "CV", "Range","Median","Skewness", 
-			"Kurtosis", "TTR", "RTTR", "HerdanC", "Rubetk", "Somer", "DugastU", "TuldavaLN",
-			"BrunetW", "HapV", "HonoreH", "SichelS", "HapN", "DisN", "Entropy", "YuleK",
-			"HDD", "ZMalpha", "ZMB", "fZMalpha", "fZMB", "fZMA", "GIGPgamma", "GIGPB", "GIGPC","PowerlawAlpha")
-				
+# measures <- c( "Language","Family", "Tokens(N)", "Types(V)", "Std Dev", "CV", "Range","Median","Skewness", 
+# 			"Kurtosis", "TTR", "RTTR", "HerdanC", "Rubetk", "Somer", "DugastU", "TuldavaLN",
+# 			"BrunetW", "HapV", "HonoreH", "SichelS", "HapN", "DisN", "Entropy", "YuleK",
+# 			"HDD", "ZMalpha", "ZMB", "fZMalpha", "fZMB", "fZMA", "GIGPgamma", "GIGPB", "GIGPC","PowerlawAlpha")
+measures <- c( "Language","Family", "Tokens(N)", "Types(V)", "Std Dev", "TTR", 
+			 "HapV", "SichelS", "HapN", "DisN", "Entropy", "YuleK",
+			"HDD", "PowerlawAlpha")
+					
 		
 #to decode language codes, language names, language family
 decode <- read.csv(paste0(getwd(),"/Programs/Decode.csv"), header = TRUE, sep = ";", quote = "", allowEscapes = TRUE)
@@ -51,7 +54,7 @@ for (k in 1:length(files)){
 
 }
 
-write.table (filemat,file=paste0(getwd(),"/Results/Diversity_Measures/Empirical/Div_Meas_All.txt"))
+write.table (filemat,file=paste0(getwd(),"/Results/Diversity_Measures/Empirical/Div_Meas_All5.txt"))
 
 
 toc <- proc.time()
